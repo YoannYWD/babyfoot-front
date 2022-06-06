@@ -1,9 +1,14 @@
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
+const io = require('socket.io-client');
 
 //Tous les matchs
 const Games = async () => {
     try {
+        const socket = io.connect('http://localhost:8000', {path: '/api/games'});
+        socket.on('data', () => {
+            console.log('1');
+        })
         const res = await axios.get('http://localhost:8000/api/games');
         const games = res.data;
         const template = `
@@ -62,11 +67,11 @@ const AddGameTemplate = () => {
 const AddGame = async (player1, player2) => {
     const header = {
         'Content-Type': 'application/json'
-      }
+    }
     const in_progress = true;
     const res = await axios.post('http://localhost:8000/api/games', {player1, player2, in_progress}, header);
     if (res.statusText === 'Created') {
-        Games();
+        const socket = io.connect('http://localhost:8000', {path: '/'});
     }
 }
 

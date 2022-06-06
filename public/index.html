@@ -10,12 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- Font awesome -->
     <script src="https://kit.fontawesome.com/56f079d2bb.js" crossorigin="anonymous"></script>
-    <!-- Websocket -->
-    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous">
-        const socket = io.connect('http://localhost:8000')
-    </script>
 </head>
-<body>
+<body>    
     <div class="container-fluid">
         <div id="headerTemplate"></div>
     </div>
@@ -63,7 +59,10 @@
         </div>
     </div>
 
-      
+<script>
+    const socket = io.connect('http://localhost:8000', {path: '/'});
+    socket.on('connect');
+</script>
 
     <script type="module" src="../src/app.js"></script>
     <!-- Bootstrap -->
